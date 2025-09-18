@@ -95,8 +95,8 @@ if (form) {
             title: "Portfolio Website",
             description: "The very site you're on now, built with HTML, CSS, and interactive JavaScript features.",
             imageUrl: "path/to/your/project-image1.jpg", // Replace with a real image path
-            liveLink: "#", // You can't link to the live site yet, but can for others
-            codeLink: "https://github.com/your-username/your-repo" // Replace with your GitHub link
+            liveLink: "https://aryanbuilds.netlify.app", // You can't link to the live site yet, but can for others
+            codeLink: "https://github.com/aryanG9403/Portfolio" // Replace with your GitHub link
         },
         {
             title: "Another Cool Project",
