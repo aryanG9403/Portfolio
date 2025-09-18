@@ -34,49 +34,61 @@ document.addEventListener('DOMContentLoaded' , ()=>{
             behavior: "smooth"
         });
     });
-    // 1. Select the elements we need
-    const form = document.querySelector(".contact-form form");
-    const formStatus = document.querySelector("#form-status");
-    const nameInput = document.querySelector("#name");
-    const emailInput = document.querySelector("#email");
-    const messageInput = document.querySelector("#message");
 
-    // 2. A function to display status messages
+    // --- COMPLETE CONTACT FORM SCRIPT (for Netlify) ---
+
+const form = document.querySelector("#contact-form");
+
+if (form) {
+    const formStatus = document.querySelector("#form-status");
+    
+    // A helper function to encode the form data
+    const encode = (data) => {
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&");
+    }
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Run your validation checks
+        const name = form.elements.name.value.trim();
+        const email = form.elements.email.value.trim();
+        const message = form.elements.message.value.trim();
+        if (name === "" || email === "" || message === "") {
+            displayMessage("Please fill out all fields.", false);
+            return;
+        }
+
+        // If validation passes, create the form data object
+        const formData = {
+            'form-name': form.getAttribute('name'),
+            'name': name,
+            'email': email,
+            'message': message
+        };
+
+        // Submit the form data to Netlify
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode(formData)
+        })
+        .then(() => {
+            displayMessage("Thanks for your message! I'll get back to you soon.", true);
+            form.reset();
+        })
+        .catch(error => {
+            displayMessage("Oops! There was a problem submitting your form.", false);
+        });
+    });
+
     function displayMessage(message, isSuccess) {
         formStatus.innerHTML = message;
-        formStatus.style.color = isSuccess ? 'green' : 'red';
-        formStatus.style.display = 'block'; // Make it visible
+        formStatus.style.color = isSuccess ? 'var(--accent-color)' : 'red';
     }
-
-    // 3. Attach a 'submit' event listener to the form
-    if (form) {
-        form.addEventListener("submit", (event) => {
-            // 4. Prevent the default form submission (page reload)
-            event.preventDefault();
-
-            // 5. Get the values from the input fields
-            const name = nameInput.value.trim();
-            const email = emailInput.value.trim();
-            const message = messageInput.value.trim();
-
-            // 6. Simple Validation
-            if (name === "" || email === "" || message === "") {
-                displayMessage("Please fill out all fields.", false);
-                return; // Stop the function
-            }
-
-            // 7. Email format validation using a regular expression
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                displayMessage("Please enter a valid email address.", false);
-                return; // Stop the function
-            }
-
-            // 8. If all validation passes
-            displayMessage("Thank you for your message! It has been sent.", true);
-            form.reset(); // Clear the form fields
-        });
-    }
+}
 
     const myProjects = [
         {
