@@ -2,7 +2,7 @@
 
 This repository contains the source code for my personal developer portfolio. Built from scratch, this project showcases my skills in front-end development, my projects, and my journey as a developer.
 
-**[View the Live Site Here](https://your-site-name.netlify.app/)** 🚀
+**[View the Live Site Here](https://aryanbuilds.netlify.app/)** 🚀
 
 ---
 
@@ -66,4 +66,4 @@ To view this project locally:
 ## 📧 Contact
 
 * **Aryan Ghotekar** - [LinkedIn](https://www.linkedin.com/in/aryan-ghotekar-672790257)
-* **Live Portfolio** - [your-site-name.netlify.app](https://your-site-name.netlify.app/)
+* **Live Portfolio** - [aryanbuilds.netlify.app](https://aryanbuilds.netlify.app/)
